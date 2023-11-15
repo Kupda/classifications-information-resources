@@ -1,22 +1,44 @@
 # Импортирование библиотек
 import sys
+import pprint
+import re
+import unicodedata
 
 # Чтение какого-то файла
-with open('100.txt', 'r', -1, 'UTF-8') as file:
+with open('docs/utf8/143', 'r', -1, 'UTF-8') as file:
     lines = file.read()
 
 
-def clearing_data(text):  # Очистка данных (не доконца)
-    new_text = text.replace(',', '')
-    new_text = new_text.replace(':', '')
-    new_text = new_text.replace('…', '.')
-    new_text = new_text.replace('?', '.')
-    new_text = new_text.replace('!', '.')
-    new_text = new_text.replace('-', '')
-    new_text = new_text.replace('  ', ' ')
-    new_text = new_text.replace('“', '')
-    new_text = new_text.replace("”", '')
+def clearing_data(text):  # Очистка данных
+    # Убираем неразрывный пробел
+    new_text = unicodedata.normalize("NFKD", text)
+
+    # В тексте оставляем все буквы, цифры, точки и пробелы (исправьте меня, если я что-то забыл)
+    new_text = re.sub("[^A-Za-zА-Яа-я.0-9-\n ]", '', new_text)
+
+    # Теряются несколько точек
+    new_text = new_text.replace('\n', ' ')
     return new_text
 
 
-print(clearing_data(lines))
+def changing_case(text):  # Изменение регистра
+    pass
+
+
+def tokenization(text):  # Токенизация
+    pass
+
+
+def deleting_stop_words(text):  # Удаление стоп-слов
+    pass
+
+
+def lemmatization(text):  # Лемматизация
+    pass
+
+
+def vectorization(text):  # Векторизация
+    pass
+
+
+pprint.pprint(clearing_data(lines))
