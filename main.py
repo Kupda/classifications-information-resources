@@ -20,6 +20,6 @@ def clearing_data(text):  # Очистка данных
     new_text = new_text.replace('\n', ' ')
     return new_text
 
-
+print()
 pprint.pprint(clearing_data(lines))
 
