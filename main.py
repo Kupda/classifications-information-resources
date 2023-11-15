@@ -21,5 +21,24 @@ def clearing_data(text):  # Очистка данных
     return new_text
 
 
-pprint.pprint(clearing_data(lines))
+def changing_case(text):  # Изменение регистра
+    pass
 
+
+def tokenization(text):  # Токенизация
+    pass
+
+
+def deleting_stop_words(text):  # Удаление стоп-слов
+    pass
+
+
+def lemmatization(text):  # Лемматизация
+    pass
+
+
+def vectorization(text):  # Векторизация
+    pass
+
+
+pprint.pprint(clearing_data(lines))
