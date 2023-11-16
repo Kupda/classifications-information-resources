@@ -18,6 +18,8 @@ def clearing_data(text):  # Очистка данных
     # Убираем неразрывный пробел
     new_text = unicodedata.normalize("NFKD", text)
     new_text = new_text.replace('-', ' ')
+    new_text = new_text.replace('.', ' ')
+    new_text = new_text.replace('@', ' ')
     # В тексте оставляем все буквы, цифры, точки и пробелы (исправьте меня, если я что-то забыл)
     new_text = re.sub("[^A-Za-zА-Яа-я\n ]", '', new_text)
 
@@ -37,8 +39,8 @@ def tokenization(text):  # Токенизация
 def deleting_stop_words(text):  # Удаление стоп-слов
     new_text = []
     stop_words = get_stop_words('russian')
-    stop_words1 = get_stop_words('english')
-    stop_words = stop_words1 + stop_words
+    #stop_words1 = get_stop_words('english')
+    #stop_words = stop_words1 + stop_words
     for i in text:
         if not (i in stop_words):
             new_text.append(i)
@@ -48,7 +50,9 @@ def deleting_stop_words(text):  # Удаление стоп-слов
 def lemmatization(text):  # Лемматизация
     tokens = []
     for i in text:
-        tokens.append(morph.parse(i)[0].normal_form)
+        p = morph.parse(i)[0]
+        if p.tag.POS != 'VERB' and p.tag.POS != 'INFN':
+            tokens.append(morph.parse(i)[0].normal_form)
     return tokens
 
 
