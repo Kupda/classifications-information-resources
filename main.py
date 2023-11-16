@@ -1,3 +1,5 @@
+# рис. что делать??
+
 # Импортирование библиотек
 import sys
 import pprint
@@ -20,6 +22,7 @@ def clearing_data(text):  # Очистка данных
     new_text = new_text.replace('-', ' ')
     new_text = new_text.replace('.', ' ')
     new_text = new_text.replace('@', ' ')
+    new_text = new_text.replace('_', ' ')
     # В тексте оставляем все буквы, цифры, точки и пробелы (исправьте меня, если я что-то забыл)
     new_text = re.sub("[^A-Za-zА-Яа-я\n ]", '', new_text)
 
@@ -52,12 +55,13 @@ def lemmatization(text):  # Лемматизация
     for i in text:
         p = morph.parse(i)[0]
         if p.tag.POS != 'VERB' and p.tag.POS != 'INFN':
-            tokens.append(morph.parse(i)[0].normal_form)
+            #if i == 'года':
+                tokens.append(morph.parse(i)[0].normal_form)
+                #print(morph.parse(i)[0].normal_form)
     return tokens
 
 
 def word_counter(text):  # Счетчик слов
-    # Выводить в порядке убывания!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     words_dict = {}
 
     for word in text:
@@ -77,8 +81,11 @@ def vectorization(text):  # Векторизация
 text = clearing_data(lines)
 text = changing_case(text)
 text = tokenization(text)
-text = deleting_stop_words(text)
+
 text = lemmatization(text)
+
+text = deleting_stop_words(text)
+#text = lemmatization(text)
 text = word_counter(text)
 pprint.pprint(text)
 # print(deleting_stop_words(text))
