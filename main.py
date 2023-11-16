@@ -4,8 +4,10 @@ import pprint
 import re
 import unicodedata
 
+
+doc = 143  # файл
 # Чтение какого-то файла
-with open('docs/utf8/143', 'r', -1, 'UTF-8') as file:
+with open(f'docs/utf8/{doc}', 'r', -1, 'UTF-8') as file:
     lines = file.read()
 
 
@@ -22,7 +24,7 @@ def clearing_data(text):  # Очистка данных
 
 
 def changing_case(text):  # Изменение регистра
-    pass
+    return text.lower()
 
 
 def tokenization(text):  # Токенизация
@@ -41,4 +43,6 @@ def vectorization(text):  # Векторизация
     pass
 
 
-pprint.pprint(clearing_data(lines))
+text = clearing_data(lines)
+text = changing_case(text)
+pprint.pprint(text)
