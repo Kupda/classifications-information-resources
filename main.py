@@ -1,4 +1,6 @@
-# рис. что делать??
+# рис. - 143
+# свой - 100
+#
 
 # Импортирование библиотек
 import pprint
@@ -9,7 +11,7 @@ from pymorphy3 import MorphAnalyzer
 
 
 morph = MorphAnalyzer()
-doc = 143
+doc = 100
 with open(f'docs/utf8/{doc}', 'r', -1, 'UTF-8') as file:
     lines = file.read()
 
@@ -37,7 +39,7 @@ def deleting_stop_words(text):  # Удаление стоп-слов
     new_text = []
     stop_words = get_stop_words('russian')
     for i in text:
-        if not (i in stop_words):
+        if not (i in stop_words) and len(i) != 1:
             new_text.append(i)
     return new_text
 
