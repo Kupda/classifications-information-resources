@@ -46,3 +46,4 @@ def vectorization(text):  # Векторизация
 text = clearing_data(lines)
 text = changing_case(text)
 pprint.pprint(text)
+print()
