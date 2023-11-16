@@ -14,7 +14,7 @@ def clearing_data(text):  # Очистка данных
     new_text = unicodedata.normalize("NFKD", text)
 
     # В тексте оставляем все буквы, цифры, точки и пробелы (исправьте меня, если я что-то забыл)
-    new_text = re.sub("[^A-Za-zА-Яа-я.0-9-\n ]", '', new_text)
+    new_text = re.sub("[^A-Za-zА-Яа-я.0-9-\n!? ]", '', new_text)
 
     # Теряются несколько точек
     new_text = new_text.replace('\n', ' ')
