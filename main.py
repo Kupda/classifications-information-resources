@@ -17,9 +17,9 @@ with open(f'docs/utf8/{doc}', 'r', -1, 'UTF-8') as file:
 def clearing_data(text):  # Очистка данных
     # Убираем неразрывный пробел
     new_text = unicodedata.normalize("NFKD", text)
-
+    new_text = new_text.replace('-', ' ')
     # В тексте оставляем все буквы, цифры, точки и пробелы (исправьте меня, если я что-то забыл)
-    new_text = re.sub("[^A-Za-zА-Яа-я-\n ]", '', new_text)
+    new_text = re.sub("[^A-Za-zА-Яа-я\n ]", '', new_text)
 
     # Теряются несколько точек
     new_text = new_text.replace('\n', ' ')
@@ -53,6 +53,7 @@ def lemmatization(text):  # Лемматизация
 
 
 def word_counter(text):  # Счетчик слов
+    # Выводить в порядке убывания!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     words_dict = {}
 
     for word in text:
