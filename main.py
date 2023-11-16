@@ -61,7 +61,9 @@ def word_counter(text):  # Счетчик слов
             words_dict[word] = words_dict[word] + 1
         else:
             words_dict[word] = 1
-    return words_dict
+    return sorted(words_dict.items(), key=lambda item: item[1], reverse=True)
+
+    # sorted_people = sorted(people.items(), key=lambda item: item[1])
 
 
 def vectorization(text):  # Векторизация
