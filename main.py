@@ -31,7 +31,7 @@ def changing_case(text):  # Изменение регистра
 
 
 def tokenization(text):  # Токенизация
-    pass
+    return text.split()
 
 
 def deleting_stop_words(text):  # Удаление стоп-слов
@@ -39,7 +39,7 @@ def deleting_stop_words(text):  # Удаление стоп-слов
     stop_words = get_stop_words('russian')
     stop_words1 = get_stop_words('english')
     stop_words = stop_words1 + stop_words
-    for i in text.split():
+    for i in text:
         if not (i in stop_words):
             new_text.append(i)
     return new_text
@@ -69,6 +69,7 @@ def vectorization(text):  # Векторизация
 
 text = clearing_data(lines)
 text = changing_case(text)
+text = tokenization(text)
 text = deleting_stop_words(text)
 text = lemmatization(text)
 text = word_counter(text)
