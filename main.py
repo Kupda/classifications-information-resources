@@ -7,14 +7,15 @@
 import pprint
 import re
 import unicodedata
-from nltk.corpus import stopwords
 from stop_words import get_stop_words
 from pymorphy3 import MorphAnalyzer
 import nltk
-from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.tokenize import word_tokenize
+from nltk.stem.porter import PorterStemmer
+from nltk.stem import snowball
+
 
 nltk.download('punkt')
-
 morph = MorphAnalyzer()
 doc = 102
 with open(f'docs/utf8/{doc}', 'r', -1, 'UTF-8') as file:
@@ -23,12 +24,7 @@ with open(f'docs/utf8/{doc}', 'r', -1, 'UTF-8') as file:
 
 def clearing_data(text):  # Очистка данных
     new_text = unicodedata.normalize("NFKD", text)
-    # new_text = new_text.replace('-', ' ')
-    # new_text = new_text.replace('.', ' ')
-    # new_text = new_text.replace('@', ' ')
-    # new_text = new_text.replace('_', ' ')
     new_text = re.sub("[^A-Za-zА-Яа-я]", ' ', new_text)
-    #new_text = new_text.replace('\n', ' ')
     return new_text
 
 
@@ -37,7 +33,6 @@ def changing_case(text):  # Изменение регистра
 
 
 def tokenization(text):  # Токенизация
-    #print(text)
     return word_tokenize(text, language="russian")
 
 
@@ -48,10 +43,14 @@ def deleting_stop_words(text):  # Удаление стоп-слов
         if not (i in stop_words) and len(i) != 1:
             new_text.append(i)
     return new_text
-    # lemmatize = nltk.WordNetLemmatizer()
-    # lemmatize.lemmatize(text)
-    # lemmatize = (for word in text if not text in set(stopwords.words("stopwords")))
-    # return lemmatize
+
+
+def stemming(text):
+    stemmer = snowball.RussianStemmer()
+    new_text = []
+    for i in text:
+        new_text.append(stemmer.stem(i))
+    return new_text
 
 
 def lemmatization(text):  # Лемматизация
@@ -79,11 +78,11 @@ def word_counter(text):  # Счетчик слов
 def vectorization(text):  # Векторизация
     pass
 
-# test
 
 text = clearing_data(lines)
 text = changing_case(text)
 text = tokenization(text)
+#text = stemming(text)
 text = lemmatization(text)
 text = deleting_stop_words(text)
 text = word_counter(text)
