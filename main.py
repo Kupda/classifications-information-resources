@@ -79,6 +79,7 @@ def word_counter(text):  # Счетчик слов
 def vectorization(text):  # Векторизация
     pass
 
+# test
 
 text = clearing_data(lines)
 text = changing_case(text)
